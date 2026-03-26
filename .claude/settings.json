@@ -1,0 +1,52 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Read(~/.agents/**)",
+      "Edit(~/.agents/**)",
+      "Write(~/.agents/**)"
+    ],
+    "deny": [
+      "Bash(rrm *)",
+      "Bash(sudo *)",
+      "Bash(chmod 777 *)",
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)"
+    ],
+    "ask": [
+      "Bash(git push*)",
+      "Bash(gh repo delete*)"
+    ],
+    "defaultMode": "default"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/rtk-rewrite.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ \"$CLAUDE_FILE\" == *.py ]] && python3 -m py_compile \"$CLAUDE_FILE\" 2>&1 | head -20 || true",
+            "statusMessage": "Checking Python syntax..."
+          }
+        ]
+      }
+    ]
+  },
+  "effortLevel": "medium",
+  "voiceEnabled": true,
+  "skipDangerousModePermissionPrompt": true
+}

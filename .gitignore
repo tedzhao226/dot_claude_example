@@ -1,0 +1,33 @@
+# Runtime / ephemeral Claude data
+.claude/backups/
+.claude/cache/
+.claude/debug/
+.claude/file-history/
+.claude/history.jsonl
+.claude/mcp-needs-auth-cache.json
+.claude/plans/
+.claude/plugins/
+.claude/projects/
+.claude/session-env/
+.claude/shell-snapshots/
+.claude/todos/
+.claude/downloads/
+
+.claude/image-cache/
+.claude/paste-cache/
+.claude/tasks/
+.claude/teams/
+
+# Contains email, account UUIDs, and session data
+.claude.json
+
+# Backup snapshots (may contain credentials, debug logs, session data)
+.claude.bak/
+.claude-backup-*
+
+# Auto-generated MCP configs
+.serena/
+
+# OS / IDE
+.DS_Store
+.idea/
